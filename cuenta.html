@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te amo <3</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            background: #001f3f;
+            color: #00d9ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px;
+            animation: glitch 1.5s infinite;
+        }
+
+        .countdown {
+            font-size: 2.5rem;
+            margin: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 51, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #00d9ff;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px 5px #00d9ff, -2px -2px 5px #003366; }
+            50% { text-shadow: -2px -2px 5px #003366, 2px 2px 5px #00d9ff; }
+            100% { text-shadow: 2px 2px 5px #00d9ff, -2px -2px 5px #003366; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Bueno amor, parece que el regalo todavia no está listo. Tendras que esperar un poco mas <3</h1>
+    <div class="countdown" id="countdown">
+        00:00:00
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0); // Medianoche de hoy
+            const diff = midnight - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").textContent = "¡Ya es medianoche!";
+                return;
+            }
+
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamada inicial
+    </script>
+</body>
+</html>
