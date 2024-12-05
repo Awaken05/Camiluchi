@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>te amo <3</title>
+    <link rel="icon" href="https://d1pwlsds4tllb7.cloudfront.net/o4gmog%2Fpreview%2F62924200%2Fmain_full.png?response-content-disposition=inline%3Bfilename%3D%22main_full.png%22%3B&response-content-type=image%2Fpng&Expires=1733392997&Signature=WScto~Uj~kh3RwCZRBq7TCauVZ6SV3zKxpyY4Uu5mFoguEkQAEpGW99o1UgNNp-EzrAd1wcrooqcBYpb7KjAwlsAfNxTh6HuJH7LEG-sqHEI8nwVtpDMoDOH5kvL4t9FplCUw55CfZb8yR-LUgN9j94cwDcYSGohbGpyGn0JaUbp~9EhXsNLy1jDdBqHoIU9pQxY~XvMw3P8GGOh5H252cLJWSBbI0yzsnQVrcchJ9YDBCpXYCQJvKRL9NfpGRs35mqWgV6a3oPA~LSZmcmlIFFS5vlTR9BA128z-kocWq~tCjrkAqr~jQFIjTRW7yVV5YL7BYXT46JxeYqU3Yf-VA__&Key-Pair-Id=APKAJT5WQLLEOADKLHBQ" type="image/png">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            background: #001f3f;
+            color: #00d9ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px;
+            animation: glitch 1.5s infinite;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 20px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .rules {
+            margin-top: 20px;
+            background-color: rgba(0, 0, 51, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #00d9ff;
+        }
+
+        .code-area {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .code-btn {
+            background-color: #001f3f;
+            color: #00d9ff;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            padding: 15px;
+            border: 1px solid #00d9ff;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .code-btn:hover {
+            background-color: #003366;
+            transform: scale(1.1);
+        }
+
+        .pin-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pin-input {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            width: 200px;
+            margin-bottom: 10px;
+        }
+
+        .pin-input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 217, 255, 0.8);
+        }
+
+        .submit-btn {
+            background-color: #001f3f;
+            color: #00d9ff;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: 1px solid #00d9ff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #003366;
+            transform: scale(1.1);
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px 5px #00d9ff, -2px -2px 5px #003366; }
+            50% { text-shadow: -2px -2px 5px #003366, 2px 2px 5px #00d9ff; }
+            100% { text-shadow: 2px 2px 5px #00d9ff, -2px -2px 5px #003366; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenida, Camila</h1>
+    <p>Este es tu regalo, pero no te va a ser fácil conseguirlo, bueno, la verdad que si es fácil</p>
+    
+    <div class="rules">
+        <h2>Reglas del Juego:</h2>
+        <p>1. Haz clic en los números para descubrir las pistas.<br>
+           2. Resuelve las pistas y encuentra el PIN.<br>
+           3. Introduce el PIN abajo y descubre mi regalo UWU.<br>
+           ¡Buena suerte, mi amor!</p>
+    </div>
+
+    <div class="code-area" id="codeArea">
+        <!-- Botones interactivos para las pistas -->
+        <button class="code-btn" onclick="showHint(1)">1</button>
+        <button class="code-btn" onclick="showHint(2)">2</button>
+        <button class="code-btn" onclick="showHint(3)">3</button>
+        <button class="code-btn" onclick="showHint(4)">4</button>
+        <button class="code-btn" onclick="showHint(5)">5</button>
+    </div>
+
+    <div class="pin-container">
+        <input type="password" class="pin-input" id="pinInput" placeholder="Introduce el PIN">
+        <button class="submit-btn" onclick="checkPin()">¿Estás segura? Descubre si has acertado el pin.</button>
+    </div>
+
+    <script>
+        // Función para mostrar las pistas
+        function showHint(button) {
+            const hints = {
+                1: "Pista 1: La primera inicial de mi nombre. ¿OAN?",
+                2: "Pista 2: ¿Qué mes nos conocimos?",
+                3: "Pista 3: ¿Qué día empezamos a salir?",
+                4: "Pista 4: La inicial de nuestra primera serie juntos.",
+                5: "Pista 5: La inicial del nombre del amor de tu vida. Soy yo, uwu."
+            };
+            alert(hints[button]);
+        }
+
+        // Función para verificar el PIN
+        function checkPin() {
+            const pin = document.getElementById("pinInput").value;
+            if (pin === "J96LJ") {
+                alert("Aishhhh. Bueno, te lo has ganado bby");
+                window.location.href = "https://www.youtube.com/watch?v=Hkq4htAXAhc";
+            } else {
+                alert("Piensa bien amochito...");
+            }
+        }
+    </script>
+</body>
+</html>
